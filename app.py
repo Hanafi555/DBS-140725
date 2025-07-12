@@ -8,9 +8,12 @@ def index():
 
 @app.route("/prediction", methods=["POST"])
 def prediction():
-    rate = float(request.form.get("rate"))
-    result = (-50.6 * rate + 90.2)
-    return render_template("prediction.html", r=result)
+    try:
+        rate = float(request.form.get("rate"))
+        result = -50.6 * rate + 90.2
+        return render_template("prediction.html", r=result)
+    except Exception as e:
+        return f"Error: {e}"
 
-if __name__ == "__main__":
-    app.run()
+# REMOVE this line below when deploying to PythonAnywhere:
+# app.run()
